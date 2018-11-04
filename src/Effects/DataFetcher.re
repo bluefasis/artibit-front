@@ -76,3 +76,27 @@ module Decode = {
   let overall = json =>
     Json.Decode.{exhibition: json |> field("exhibition", exhibition), arts: json |> field("arts", arts)};
 };
+
+let fetchOverall = () =>
+  Js.Promise.(
+    Fetch.fetch(overallUrl)
+    |> then_(Fetch.Response.json)
+    |> then_(json => json |> Decode.overall |> (overall => Some(overall) |> resolve))
+    |> catch(_err => resolve(None))
+  );
+
+let fetchArtistInfo = artistId =>
+  Js.Promise.(
+    Fetch.fetch(Js.String.replace("{artistId}", artistId, artistInfoUrl))
+    |> then_(Fetch.Response.json)
+    |> then_(json => json |> Decode.artistInfo |> (artistInfo => Some(artistInfo) |> resolve))
+    |> catch(_err => resolve(None))
+  );
+
+let fetchArtDetail = artId =>
+  Js.Promise.(
+    Fetch.fetch(Js.String.replace("{artId}", artId, artDetailUrl))
+    |> then_(Fetch.Response.json)
+    |> then_(json => json |> Decode.art |> (art => Some(art) |> resolve))
+    |> catch(_err => resolve(None))
+  );
