@@ -4,7 +4,13 @@
     "dir" : "src",
     "subdirs" : true
   },
-  "bs-dependencies": ["reason-react", "@glennsl/bs-jest", "bs-fetch"],
+  "bs-dependencies": [
+    "reason-react",
+    "@glennsl/bs-jest",
+    "@glennsl/bs-json",
+    "bs-fetch",
+    "bs-webapi"
+  ],
   "reason": {
     "react-jsx": 2
   },

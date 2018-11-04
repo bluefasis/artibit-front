@@ -1,5 +1,5 @@
 type route =
   | Home
-  | PieceDetail
-  | ArtistInfo
+  | ArtDetail(string)
+  | ArtistInfo(string)
   | Default;

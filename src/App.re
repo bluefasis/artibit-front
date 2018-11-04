@@ -5,7 +5,6 @@ open Store;
 type state = {
   route,
   url: ReasonReact.Router.url,
-  prevUrl: ReasonReact.Router.url,
 };
 
 type action =
@@ -23,16 +22,11 @@ let make = _children => {
       hash: "",
       search: "",
     },
-    prevUrl: {
-      path: [],
-      hash: "",
-      search: "",
-    },
   },
   reducer: (action, state) =>
     switch (action) {
     | RouteTo(route) => ReasonReact.Update({...state, route})
-    | GetUrl(url) => ReasonReact.Update({...state, url, prevUrl: state.url})
+    | GetUrl(url) => ReasonReact.Update({...state, url})
     },
   didMount: self => {
     let jumpTo = x => self.send(RouteTo(x));
@@ -40,8 +34,8 @@ let make = _children => {
       ReasonReact.Router.watchUrl(url => {
         switch (url.path) {
         | ["home"] => jumpTo(Home)
-        | ["artist", _submenu] => jumpTo(ArtistInfo)
-        | ["piece", _submenu] => jumpTo(PieceDetail)
+        | ["artist", artistId] => jumpTo(ArtistInfo(artistId))
+        | ["art", artId] => jumpTo(ArtDetail(artId))
         | [] => jumpTo(Default)
         | _ => jumpTo(Home)
         };
@@ -51,5 +45,5 @@ let make = _children => {
     ReasonReact.Router.push("");
   },
 
-  render: ({state: {route, url, prevUrl}}) => <main> <DataDistributor route url prevUrl /> </main>,
+  render: ({state: {route, url}}) => <main> <PageDistributor route url /> </main>,
 };
