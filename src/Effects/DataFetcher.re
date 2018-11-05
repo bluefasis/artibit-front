@@ -5,7 +5,7 @@ let overallUrl = {j|$baseUrl/overall/$exhibitionId|j};
 let artistInfoUrl = {j|$baseUrl/artist/{artistId}|j};
 let artDetailUrl = {j|$baseUrl/art/{artId}|j};
 
-type id = string;
+type id = int;
 type name = string;
 type image = string;
 type subtitle = string;
@@ -46,16 +46,16 @@ type overall = {
 module Decode = {
   let artistInfo = json =>
     Json.Decode.{
-      id: json |> field("id", string),
+      id: json |> field("id", int),
       name: json |> field("name", string),
       body: json |> field("body", string),
     };
 
-  let artist = json => Json.Decode.{id: json |> field("id", string), name: json |> field("name", string)};
+  let artist = json => Json.Decode.{id: json |> field("id", int), name: json |> field("name", string)};
 
   let art = json =>
     Json.Decode.{
-      id: json |> field("id", string),
+      id: json |> field("id", int),
       name: json |> field("name", string),
       image: json |> field("image", string),
       subtitle: json |> field("subtitle", string),
@@ -67,7 +67,7 @@ module Decode = {
 
   let exhibition = json =>
     Json.Decode.{
-      id: json |> field("id", string),
+      id: json |> field("id", int),
       name: json |> field("name", string),
       image: json |> field("image", string),
       body: json |> field("body", string),
