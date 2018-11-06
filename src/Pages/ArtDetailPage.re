@@ -1,9 +1,60 @@
 [@bs.module] external logo: string = "../logo.svg";
 
-let component = ReasonReact.statelessComponent("ArtDetailPage");
+open DataFetcher;
+
+type action =
+  | LoadData
+  | LoadedData(art)
+  | LoadDataFailed;
+
+type status =
+  | Idle
+  | Loading
+  | Failure
+  | Success;
+
+type state = {
+  status,
+  art,
+};
+
+let loadData = (send, artId) =>
+  Js.Promise.(
+    DataFetcher.fetchArtDetail(artId)
+    |> then_(result =>
+         switch (result) {
+         | Some(art) => resolve(send(LoadedData(art)))
+         | None => resolve(send(LoadDataFailed))
+         }
+       )
+    |> ignore
+  );
+
+let component = ReasonReact.reducerComponent("ArtDetailPage");
 
 let make = (~artId, _children) => {
   ...component,
+  initialState: () => {
+    status: Idle,
+    art: {
+      id: 0,
+      name: "",
+      image: "",
+      subtitle: "",
+      body: "",
+      artist: {
+        id: 0,
+        name: "",
+      },
+    },
+  },
+  didMount: self => self.send(LoadData),
+  reducer: (action, state) =>
+    switch (action) {
+    | LoadData => UpdateWithSideEffects({...state, status: Loading}, (({send}) => loadData(send, artId)))
+    | LoadedData(art) => Update({status: Success, art})
+    | LoadDataFailed => Update({...state, status: Failure})
+    },
   render: _self =>
     <div className="App">
       <div className="App-header">
