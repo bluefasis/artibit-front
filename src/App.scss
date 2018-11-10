@@ -15,7 +15,7 @@
 
 .App-header {
   min-height: 5vh;
-  padding-left: 3vmin;
+  padding: 3vw 0 0 3vw;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -23,6 +23,18 @@
   font-size: calc(5px + 2vmin);
   font-weight: bold;
   color: lightgrey;
+  .btn {
+    background-color: transparent;
+    border: none;
+    color: gray;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: transparent;
+  }
+  .btn:focus {
+    box-shadow: none;
+  }
 }
 
 .App-body {
@@ -31,6 +43,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: start;
+  word-break: break-word;
+  font-size: calc(8px + 2vmin);
+  font-weight: 300;
+  color: whitesmoke;
   h4{
     font-size: calc(12px + 2vmin);
     font-weight: 500;
@@ -41,15 +58,20 @@
     font-size: calc(6px + 2vmin);
     font-weight: 400;
     color: gray;
-    margin-bottom: 4vmin;
+    margin-bottom: 2vmin;
   }
   p {
-    font-size: calc(8px + 2vmin);
-    font-weight: 300;
-    text-align: start;
     text-indent: 5vw;
-    word-break: break-word;
-    color: whitesmoke;
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+  }
+  table{
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+  }
+  th {
+    font-weight: 400;
+    color: floralwhite;
   }
 }
 

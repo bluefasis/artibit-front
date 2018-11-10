@@ -58,7 +58,7 @@ let make = (~artId, _children) => {
     },
   render: self =>
     <div className="App">
-      <div className="App-header"> {ReasonReact.string("<")} </div>
+      <div className="App-header"> <HomeButton /> </div>
       <div className="App-body">
         <img src={self.state.art.image} className="Img-main" alt={self.state.art.name} />
         <h4> {ReasonReact.string(self.state.art.name)} </h4>
