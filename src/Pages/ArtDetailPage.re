@@ -1,6 +1,7 @@
 [@bs.module] external logo: string = "../logo.svg";
 
 open DataFetcher;
+open ReasonReactUtils;
 
 type action =
   | LoadData
@@ -55,16 +56,14 @@ let make = (~artId, _children) => {
     | LoadedData(art) => Update({status: Success, art})
     | LoadDataFailed => Update({...state, status: Failure})
     },
-  render: _self =>
+  render: self =>
     <div className="App">
-      <div className="App-header">
-        <img src=logo className="App-logo" alt="logo" />
-        <h2> {ReasonReact.string({j|ArtDetailPage$artId|j})} </h2>
+      <div className="App-header"> {ReasonReact.string("<")} </div>
+      <div className="App-body">
+        <img src={self.state.art.image} className="Img-main" alt={self.state.art.name} />
+        <h4> {ReasonReact.string(self.state.art.name)} </h4>
+        <h5> {ReasonReact.string(self.state.art.subtitle)} </h5>
+        <div dangerouslySetInnerHTML={dangerousHtml(self.state.art.body)} />
       </div>
-      <p className="App-intro">
-        {ReasonReact.string("To get started, edit")}
-        <code> {ReasonReact.string(" src/ArtDetailPage.re ")} </code>
-        {ReasonReact.string("and save to reload.")}
-      </p>
     </div>,
 };
