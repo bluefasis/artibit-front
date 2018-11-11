@@ -1,6 +1,5 @@
-[@bs.module] external logo: string = "../logo.svg";
-
 open DataFetcher;
+open ReasonReactUtils;
 
 type action =
   | LoadData
@@ -53,16 +52,19 @@ let make = _children => {
     | LoadedData(overall) => Update({status: Success, overall})
     | LoadDataFailed => Update({...state, status: Failure})
     },
-  render: _self =>
+  render: self =>
     <div className="App">
-      <div className="App-header">
-        <img src=logo className="App-logo" alt="logo" />
-        <h2> {ReasonReact.string("HomePage")} </h2>
+      <div className="App-main" onClick={_event => goToUrl("/artist/1")}>
+        <img src={self.state.overall.exhibition.image} className="img-main" alt={self.state.overall.exhibition.name} />
       </div>
-      <p className="App-intro">
-        {ReasonReact.string("To get started, edit")}
-        <code> {ReasonReact.string(" src/HomePage.re ")} </code>
-        {ReasonReact.string("and save to reload.")}
-      </p>
+      <div className="App-preview row">
+        {
+          matchListToArray(
+            Belt.List.mapWithIndex(self.state.overall.arts, (i, art) =>
+              <div className="col-6"> <ArtLinkImg key={string_of_int(i)} art /> </div>
+            ),
+          )
+        }
+      </div>
     </div>,
 };

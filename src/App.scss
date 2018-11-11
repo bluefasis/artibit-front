@@ -4,13 +4,38 @@
 }
 
 .App-main {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: whitesmoke;
+  .img-main {
+    width: 100vw;
+    margin-bottom: 10vmin;
+  }
+}
+
+.App-preview {
+  padding: 0 2vw 3vh 2vw;
+  display: flex;
+  align-items: start;
+  text-align: start;
+  word-break: break-word;
+  font-size: calc(3px + 2vmin);
+  font-weight: 300;
+  color: gainsboro;
+  margin: 0;
+  .img-preview {
+    width: 100%;
+    margin-bottom: 2vmin;
+    border-radius: 6px;
+  }
+  .img-name {
+    margin-bottom: 3vmin;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .App-header {
@@ -48,6 +73,10 @@
   font-size: calc(8px + 2vmin);
   font-weight: 300;
   color: whitesmoke;
+  .img-main {
+    width: 80vw;
+    margin-bottom: 5vmin;
+  }
   h4{
     font-size: calc(12px + 2vmin);
     font-weight: 500;
@@ -73,9 +102,4 @@
     font-weight: 400;
     color: floralwhite;
   }
-}
-
-.Img-main {
-  width: 80vw;
-  margin-bottom: 5vmin;
 }
