@@ -57,14 +57,18 @@ let make = _children => {
       <div className="App-main" onClick={_event => goToUrl("/artist/1")}>
         <img src={self.state.overall.exhibition.image} className="img-main" alt={self.state.overall.exhibition.name} />
       </div>
-      <div className="App-preview row">
-        {
-          matchListToArray(
-            Belt.List.mapWithIndex(self.state.overall.arts, (i, art) =>
-              <div className="col-6"> <ArtLinkImg key={string_of_int(i)} art /> </div>
-            ),
-          )
-        }
+      <div className="App-preview">
+        <div className="container-fluid special">
+          <div className="row">
+            {
+              matchListToArray(
+                Belt.List.mapWithIndex(self.state.overall.arts, (i, art) =>
+                  <div className="col"> <ArtLinkImg key={string_of_int(i)} art /> </div>
+                ),
+              )
+            }
+          </div>
+        </div>
       </div>
     </div>,
 };

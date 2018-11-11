@@ -16,7 +16,7 @@
 }
 
 .App-preview {
-  padding: 0 2vw 3vh 2vw;
+  padding: 0 4vw 3vh 4vw;
   display: flex;
   align-items: start;
   text-align: start;
@@ -31,10 +31,20 @@
     border-radius: 6px;
   }
   .img-name {
-    margin-bottom: 3vmin;
+    margin-bottom: 2vw;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .special .row {
+    display: block;
+    column-count: 2;
+    break-inside: avoid;
+    max-width: none;
+  }
+  .col {
+    padding-left: 2vmin;
+    padding-right: 1vmin;
   }
 }
 
