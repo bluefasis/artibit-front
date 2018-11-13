@@ -1,5 +1,5 @@
 let exhibitionId = 1;
-let baseUrl = "http://192.168.99.100:3000/download";
+let baseUrl = "http://api.xn--12cr9b9d7azezc.com/download";
 
 let overallUrl = {j|$baseUrl/overall/$exhibitionId|j};
 let artistInfoUrl = {j|$baseUrl/artist/{artistId}|j};
